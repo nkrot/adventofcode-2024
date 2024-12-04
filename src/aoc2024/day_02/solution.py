@@ -32,7 +32,7 @@ def is_safe_with_problem_dampener(report: list[int]) -> bool:
     )
 
 
-def drop_one_level(items):
+def drop_one_level(items: list):
     for idx in range(len(items)):
         shorter = items[:idx] + items[idx+1:]
         yield shorter
@@ -50,8 +50,8 @@ def solve_p2(fpath: str):
 
 
 if __name__ == "__main__":
-    #solve_p1("test.1.txt") #=> 2
+    solve_p1("test.1.txt") #=> 2
     solve_p1("input.txt") #=> 299
 
-    #solve_p2("test.1.txt") #=> 4
+    solve_p2("test.1.txt") #=> 4
     solve_p2("input.txt") #=> 364
