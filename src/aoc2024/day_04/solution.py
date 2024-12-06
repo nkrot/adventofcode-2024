@@ -80,4 +80,4 @@ if __name__ == "__main__":
     solve_p1() #=> 2517
 
     solve_p2("test.1.txt") #=> 9
-    solve_p2() #= 1960
+    solve_p2() #=> 1960

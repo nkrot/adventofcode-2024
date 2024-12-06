@@ -2,8 +2,18 @@
 General purpose utilities for AOC2024
 """
 
-from typing import Any, Callable
+import os
+from typing import Any, Callable, Optional
 
+def from_env(var: str = "DEBUG", alt = None) -> Optional[str|int]:
+    """
+    Get value of variable `var` from the environment. If `var` not
+    provided, get value of the value DEBUG
+    """
+    val = os.environ.get(var, alt)
+    if val and val.isdecimal():
+        val = int(val)
+    return val
 
 def load_input(
     fpath: str = None,
