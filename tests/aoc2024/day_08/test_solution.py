@@ -1,7 +1,7 @@
 
 import pytest
 
-from aoc2024.day_07.solution import solve_p1, solve_p2
+from aoc2024.day_08.solution import solve_p1, solve_p2
 
 def test_solve_p1(tdata_1):
     actual = solve_p1(tdata_1.path)
