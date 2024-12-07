@@ -5,6 +5,7 @@ General purpose utilities for AOC2024
 import os
 from typing import Any, Callable, Optional
 
+
 def from_env(var: str = "DEBUG", alt = None) -> Optional[str|int]:
     """
     Get value of variable `var` from the environment. If `var` not
@@ -14,6 +15,7 @@ def from_env(var: str = "DEBUG", alt = None) -> Optional[str|int]:
     if val and val.isdecimal():
         val = int(val)
     return val
+
 
 def load_input(
     fpath: str = None,

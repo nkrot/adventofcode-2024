@@ -14,13 +14,20 @@ license = {file = "LICENSE.txt"}
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
+    ]
+dependencies = [
+    "pytest",
+    #"networkx"
 ]
-#dependencies = [
-#    "networkx"
-#]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.dynamic]
 version = {attr = "aoc2024.__version__"}
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+pythonpath = "src"
