@@ -41,6 +41,8 @@ def solve_p1(fpath = None):
 
     print(count)
 
+    return count
+
 
 def solve_p2(fpath = None):
     brd = load_input(fpath)
@@ -73,6 +75,8 @@ def solve_p2(fpath = None):
             count += 1
 
     print(count)
+
+    return count
 
 
 if __name__ == "__main__":
