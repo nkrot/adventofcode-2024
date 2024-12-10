@@ -3,28 +3,24 @@
 from itertools import product
 from copy import deepcopy
 
-from aoc2024 import load_input, from_env
+from aoc2024 import from_env
 from aoc2024 import matrix as m
 
 DEBUG = from_env()
 
-UP = (-1, 0)
-DOWN = (1, 0)
-LEFT = (0, -1)
-RIGHT = (0, 1)
 
-TURNS = (UP, RIGHT, DOWN, LEFT)
+TURNS = (m.UP, m.RIGHT, m.DOWN, m.LEFT)
 
 
 def load(fpath = None):
-    maze = load_input(fpath, line_parser=list)
+    maze = m.load(fpath)
     guard = ()
 
     h, w = m.shape(maze)
     for r, c in product(range(h), range(w)):
         v = maze[r][c]
         if v == "^":
-            guard = [(r, c), UP, 1]
+            guard = [(r, c), m.UP, 1]
         if v != "#":
             maze[r][c] = 0
         # else:
@@ -56,7 +52,7 @@ def turn(guard):
 
 
 def test_turn():
-    guard = [(0, 0), UP]
+    guard = [(0, 0), m.UP]
     print(guard)
     for _ in range(5):
         turn(guard)
@@ -108,6 +104,7 @@ def solve_p1(fpath = None):
         print_maze(maze)
         print(guard)
     print(guard[2])
+    return guard[2]
 
 
 def points_around(center: tuple[int, int]):
@@ -128,7 +125,7 @@ def points_around(center: tuple[int, int]):
 # This means, we dont need to make a copy of it.
 
 def solve_p2(fpath = None):
-    solve_p2_v2(fpath)
+    return solve_p2_v2(fpath)
 
 
 def solve_p2_v3(fpath = None):
@@ -198,6 +195,7 @@ def solve_p2_v2(fpath = None):
         if v == 0 and has_loop(maze, guard, xy):
             c += 1
     print(c)
+    return c
 
 
 def has_loop(maze, guard, xy) -> bool:
@@ -236,6 +234,7 @@ def solve_p2_v1(fpath = None):
         if v == 0 and has_loop(maze, guard, xy):
             cnt += 1
     print(cnt)
+    return cnt
 
 
 if __name__ == "__main__":
