@@ -25,7 +25,10 @@ def solve_p1(path):
 
     diffs = [abs(a-b) for a, b in zip(ls, rs)]
 
-    print(sum(diffs))
+    res = sum(diffs)
+    print(res)
+
+    return res
 
 
 def solve_p2(path):
@@ -35,18 +38,20 @@ def solve_p2(path):
     counts_rs = Counter(rs)
 
     scores = [
-        lnum*counts_rs[lnum] * lcnt
+        lnum * counts_rs[lnum] * lcnt
         for lnum, lcnt in counts_ls.items()
     ]
 
-    print(sum(scores))
+    res = sum(scores)
+    print(res)
+
+    return res
 
 
 
 if __name__ == "__main__":
 
     solve_p1("test.1.txt")  # = 11
-    exit(100)
     solve_p1("input.txt") #=> 1197984
 
     solve_p2("test.1.txt")  # => 31
