@@ -13,6 +13,8 @@ def solve_p1(fpath = None):
             res += int(m[1]) * int(m[2])
     print(res)
 
+    return res
+
 
 def solve_p2(fpath = None):
     lines = load_input(fpath)
@@ -27,6 +29,8 @@ def solve_p2(fpath = None):
             elif doit:
                 res += int(m[1]) * int(m[2])
     print(res)
+
+    return res
 
 
 if __name__ == "__main__":
