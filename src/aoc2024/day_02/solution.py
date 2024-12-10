@@ -44,9 +44,11 @@ def solve_p1(fpath: str, safety_checker = is_safe):
     res = len(safe_reports)
     print(res)
 
+    return res
+
 
 def solve_p2(fpath: str):
-    solve_p1(fpath, is_safe_with_problem_dampener)
+    return solve_p1(fpath, is_safe_with_problem_dampener)
 
 
 if __name__ == "__main__":
