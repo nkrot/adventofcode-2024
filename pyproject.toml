@@ -17,6 +17,8 @@ classifiers = [
     ]
 dependencies = [
     "pytest",
+    "pytest-skip-slow",
+    "pytest-datadir"
     #"networkx"
 ]
 

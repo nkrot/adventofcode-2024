@@ -54,3 +54,20 @@ def test_get_value_outside_of_matrix(mat_5x4_int):
     assert None == m.value_at(mat_5x4_int, (5,5))
     assert None == m.value_at(mat_5x4_int, (5,4))
     assert None == m.value_at(mat_5x4_int, (-1,1))
+
+
+def test_load_as_int(datadir):
+    expected = [
+        [0, 1, 2, 3],
+        [1, 2, 3, 4],
+        [8, 7, 6, 5],
+        [9, 8, 7, 6]
+    ]
+
+    fpath = datadir / "matrix.01.txt"
+    actual = m.load(fpath, as_type=int)
+
+    assert expected == actual
+
+# TODO
+# m.load() knowns default file
