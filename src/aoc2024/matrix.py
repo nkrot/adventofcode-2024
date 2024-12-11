@@ -7,11 +7,21 @@ from .vector import add as vadd
 # TODO:
 # pprint() for pretty printing of the matrix
 
-UP = (-1, 0)
-DOWN = (1, 0)
-LEFT = (0, -1)
-RIGHT = (0, 1)
+UP    = (-1,  0)
+DOWN  = ( 1,  0)
+LEFT  = ( 0, -1)
+RIGHT = ( 0,  1)
 
+# synonymous terminology: north, south, west, east, north-west, ...
+N = UP
+S = DOWN
+W = LEFT
+E = RIGHT
+
+NW = (-1, -1)
+NE = (-1,  1)
+SW = ( 1, -1)
+SE = ( 1,  1)
 
 def load(
     fpath: str = None,
