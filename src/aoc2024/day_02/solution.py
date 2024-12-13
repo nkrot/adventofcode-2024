@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 
-from aoc2024 import load_input
-
-
-def parse_line(line: str) -> list[int]:
-    return list(map(int, line.strip().split()))
+from aoc2024 import load_input, to_numbers
 
 
 def is_safe(report: list[int]) -> bool:
@@ -39,7 +35,7 @@ def drop_one_level(items: list):
 
 
 def solve_p1(fpath: str, safety_checker = is_safe):
-    reports = load_input(fpath, line_parser=parse_line)
+    reports = load_input(fpath, line_parser=to_numbers)
     safe_reports = list(filter(safety_checker, reports))
     res = len(safe_reports)
     print(res)

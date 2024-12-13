@@ -1,7 +1,8 @@
-import re
+
+from aoc2024 import to_numbers
 
 def parse_line(line: str) -> tuple[int, list[int]]:
-    words = list(map(int, re.split(r"\D+", line)))
+    words = to_numbers(line)
     return (words[0], words[1:])
 
 
