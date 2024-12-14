@@ -115,4 +115,4 @@ def to_numbers(line: str, cls=int) -> list[int]:
     separated).
     """
 
-    return list(map(int, re.findall(r'\d+', line)))
+    return list(map(int, re.findall(r'-?\d+', line)))
