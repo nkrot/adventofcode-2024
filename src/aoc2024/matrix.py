@@ -1,5 +1,5 @@
 import itertools
-from typing import Callable
+from typing import Callable, Optional
 
 from .utils import load_input
 from .vector import add as vadd
@@ -82,12 +82,44 @@ def set_value_at(matrix: list[list], coord: tuple[int, int], value):
 
 
 def scan(matrix: list[list], with_value: bool=False):
+    """
+
+    TODO:
+    allow passing a predicate to filter by position and/or value
+    This will work like `findall()`
+    """
     maxx, maxy = shape(matrix)
     for x, y in itertools.product(range(maxx), range(maxy)):
         if with_value:
             yield (x, y), matrix[x][y]
         else:
             yield (x, y)
+
+
+def find(matrix: list[list], value) -> Optional[tuple]:
+    """ find the first occurrence of `value` in the matrix
+
+    Arguments
+    ---------
+    matrix :
+    value :
+        a value or a callable/predicate to test value against
+
+    Returns
+    -------
+    None if nothing was found
+    Otherwise, a tuple of two values, the first being a coordinate xy
+    and the second the value at that coordinate
+
+    """
+    if callable(value):
+        is_ok = lambda x: value(x)
+    else:
+        is_ok = lambda x: value == x
+
+    for xy, v in scan(matrix, with_value=True):
+        if is_ok(v):
+            return xy, v
 
 
 def around(matrix: list[list], xy: tuple[int, int]):
@@ -101,7 +133,7 @@ def around(matrix: list[list], xy: tuple[int, int]):
         the cell coordinate and the cell value
 
     TODO:
-    allow more complex directions? e.g. diagonal, via parameter?
+    allow more complex directions? e.g. diagonal, via parameter? (e.g. day_14)
     """
     directions = [UP, DOWN, LEFT, RIGHT]
     maxx, maxy = shape(matrix)
@@ -109,3 +141,23 @@ def around(matrix: list[list], xy: tuple[int, int]):
         x, y = vadd(xy, dxy)
         if 0 <= x < maxx and 0 <= y < maxy:
             yield type(xy)([x, y]), matrix[x][y]
+
+
+original_print = print
+
+def print(
+    matrix: list[list],
+    *,
+    header: str = None,
+    footer: str = None,
+    row_hook: Callable = None,
+):
+    """ Print 2D matrix """
+    if header:
+        original_print(header)
+    for row in matrix:
+        if row_hook is not None:
+            row = row_hook(row)
+        original_print(row)
+    if footer:
+        original_print(footer)
