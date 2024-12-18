@@ -161,3 +161,24 @@ def print(
         original_print(row)
     if footer:
         original_print(footer)
+
+
+def create(height: int, width: int, value = None) -> list[list]:
+    """
+    Create a 2D matrix of shape (height, width) and fill it with values `value`
+
+    Arguments
+    ---------
+    height : int
+    width : int
+    value : optional
+
+    Returns
+    -------
+    list of lists of values (2D matrix of values)
+    """
+    mat = [
+        [value] * width
+        for _ in range(height)
+    ]
+    return mat
