@@ -19,7 +19,8 @@ dependencies = [
     "numpy",
     "pytest",
     "pytest-skip-slow",
-    "pytest-datadir"
+    "pytest-datadir",
+    "frozendict",
     #"networkx"
 ]
 
