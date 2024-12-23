@@ -16,12 +16,12 @@ classifiers = [
     "Programming Language :: Python :: 3",
     ]
 dependencies = [
+    "networkx",
     "numpy",
     "pytest",
     "pytest-skip-slow",
     "pytest-datadir",
     "frozendict",
-    #"networkx"
 ]
 
 [tool.setuptools.packages.find]
