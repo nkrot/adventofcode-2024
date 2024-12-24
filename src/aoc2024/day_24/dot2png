@@ -1,0 +1,9 @@
+#!/bin/bash
+
+INFILES=${@:-graph.*.dot}
+
+for infile in $INFILES; do
+    outfile="$infile.png"
+    echo "Processing: ${infile} --> ${outfile}"
+    dot -Tpng "$infile" -o "$outfile"
+done

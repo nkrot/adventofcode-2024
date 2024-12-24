@@ -14,7 +14,7 @@ license = {file = "LICENSE.txt"}
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
-    ]
+]
 dependencies = [
     "networkx",
     "numpy",
@@ -22,6 +22,8 @@ dependencies = [
     "pytest-skip-slow",
     "pytest-datadir",
     "frozendict",
+    "pygraphviz", # depends on system: graphviz libgraphviz-dev
+    #"matplotlib",
 ]
 
 [tool.setuptools.packages.find]

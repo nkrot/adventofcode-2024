@@ -1,0 +1,42 @@
+strict digraph "" {
+	node [label="\N"];
+	x00	[label="x00
+[value=1]",
+		value=1];
+	z00	[label="z00
+[op=AND
+value=0]",
+		op=AND,
+		value=0];
+	x00 -> z00;
+	x01	[label="x01
+[value=1]",
+		value=1];
+	z01	[label="z01
+[op=XOR
+value=0]",
+		op=XOR,
+		value=0];
+	x01 -> z01;
+	x02	[label="x02
+[value=1]",
+		value=1];
+	z02	[label="z02
+[op=OR
+value=1]",
+		op=OR,
+		value=1];
+	x02 -> z02;
+	y00	[label="y00
+[value=0]",
+		value=0];
+	y00 -> z00;
+	y01	[label="y01
+[value=1]",
+		value=1];
+	y01 -> z01;
+	y02	[label="y02
+[value=0]",
+		value=0];
+	y02 -> z02;
+}

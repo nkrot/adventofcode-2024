@@ -1,0 +1,213 @@
+strict digraph "" {
+	node [label="\N"];
+	x00	[label="x00
+[value=1]",
+		value=1];
+	ntg	[label="ntg
+[op=XOR]",
+		op=XOR];
+	x00 -> ntg;
+	fst	[label="fst
+[op=OR]",
+		op=OR];
+	x00 -> fst;
+	vdt	[label="vdt
+[op=OR]",
+		op=OR];
+	x00 -> vdt;
+	x01	[label="x01
+[value=0]",
+		value=0];
+	tnw	[label="tnw
+[op=OR]",
+		op=OR];
+	x01 -> tnw;
+	nrd	[label="nrd
+[op=OR]",
+		op=OR];
+	x01 -> nrd;
+	x02	[label="x02
+[value=1]",
+		value=1];
+	pbm	[label="pbm
+[op=AND]",
+		op=AND];
+	x02 -> pbm;
+	x03	[label="x03
+[value=1]",
+		value=1];
+	x03 -> fst;
+	x03 -> vdt;
+	ffh	[label="ffh
+[op=XOR]",
+		op=XOR];
+	x03 -> ffh;
+	x04	[label="x04
+[value=0]",
+		value=0];
+	kjc	[label="kjc
+[op=AND]",
+		op=AND];
+	x04 -> kjc;
+	y00	[label="y00
+[value=1]",
+		value=1];
+	djm	[label="djm
+[op=AND]",
+		op=AND];
+	y00 -> djm;
+	psh	[label="psh
+[op=OR]",
+		op=OR];
+	y00 -> psh;
+	y00 -> kjc;
+	y01	[label="y01
+[value=1]",
+		value=1];
+	y01 -> pbm;
+	y02	[label="y02
+[value=1]",
+		value=1];
+	fgs	[label="fgs
+[op=OR]",
+		op=OR];
+	y02 -> fgs;
+	y02 -> tnw;
+	y03	[label="y03
+[value=1]",
+		value=1];
+	y03 -> ffh;
+	y03 -> nrd;
+	y03 -> djm;
+	y03 -> psh;
+	y04	[label="y04
+[value=1]",
+		value=1];
+	y04 -> ntg;
+	y04 -> fgs;
+	mjb	[label="mjb
+[op=XOR]",
+		op=XOR];
+	z00	[label="z00
+[op=XOR]",
+		op=XOR];
+	mjb -> z00;
+	ntg -> mjb;
+	kwq	[label="kwq
+[op=OR]",
+		op=OR];
+	ntg -> kwq;
+	fgs -> mjb;
+	tgd	[label="tgd
+[op=XOR]",
+		op=XOR];
+	fgs -> tgd;
+	wpb	[label="wpb
+[op=XOR]",
+		op=XOR];
+	fgs -> wpb;
+	bfw	[label="bfw
+[op=OR]",
+		op=OR];
+	tnw -> bfw;
+	frj	[label="frj
+[op=OR]",
+		op=OR];
+	tnw -> frj;
+	gnj	[label="gnj
+[op=OR]",
+		op=OR];
+	tnw -> gnj;
+	z05	[label="z05
+[op=OR]",
+		op=OR];
+	kwq -> z05;
+	kpj	[label="kpj
+[op=OR]",
+		op=OR];
+	kpj -> z05;
+	rvg	[label="rvg
+[op=AND]",
+		op=AND];
+	fst -> rvg;
+	fst -> frj;
+	z01	[label="z01
+[op=XOR]",
+		op=XOR];
+	tgd -> z01;
+	z11	[label="z11
+[op=AND]",
+		op=AND];
+	tgd -> z11;
+	z09	[label="z09
+[op=XOR]",
+		op=XOR];
+	tgd -> z09;
+	z12	[label="z12
+[op=XOR]",
+		op=XOR];
+	tgd -> z12;
+	rvg -> z01;
+	rvg -> z12;
+	z10	[label="z10
+[op=AND]",
+		op=AND];
+	bfw -> z10;
+	bfw -> z00;
+	z06	[label="z06
+[op=OR]",
+		op=OR];
+	bfw -> z06;
+	vdt -> bfw;
+	hwm	[label="hwm
+[op=AND]",
+		op=AND];
+	vdt -> hwm;
+	frj -> z10;
+	z08	[label="z08
+[op=OR]",
+		op=OR];
+	frj -> z08;
+	z04	[label="z04
+[op=XOR]",
+		op=XOR];
+	frj -> z04;
+	z07	[label="z07
+[op=OR]",
+		op=OR];
+	frj -> z07;
+	bqk	[label="bqk
+[op=OR]",
+		op=OR];
+	bqk -> z08;
+	bqk -> z06;
+	bqk -> z07;
+	z03	[label="z03
+[op=AND]",
+		op=AND];
+	bqk -> z03;
+	ffh -> bqk;
+	nrd -> bqk;
+	nrd -> wpb;
+	nrd -> hwm;
+	djm -> kpj;
+	qhw	[label="qhw
+[op=OR]",
+		op=OR];
+	djm -> qhw;
+	psh -> tgd;
+	gnj -> z11;
+	z02	[label="z02
+[op=AND]",
+		op=AND];
+	gnj -> z02;
+	wpb -> z02;
+	kjc -> kwq;
+	kjc -> rvg;
+	qhw -> z09;
+	qhw -> z04;
+	pbm -> kpj;
+	pbm -> gnj;
+	pbm -> qhw;
+	hwm -> z03;
+}
