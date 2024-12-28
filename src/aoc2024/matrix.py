@@ -1,5 +1,5 @@
 import itertools
-from typing import Callable, Optional
+from typing import Callable, Optional, Iterator
 
 from .utils import load_input
 from .vector import add as vadd
@@ -83,10 +83,6 @@ def set_value_at(matrix: list[list], coord: tuple[int, int], value):
 
 def scan(matrix: list[list], with_value: bool=False):
     """
-
-    TODO:
-    allow passing a predicate to filter by position and/or value
-    This will work like `findall()`
     """
     maxx, maxy = shape(matrix)
     for x, y in itertools.product(range(maxx), range(maxy)):
@@ -103,15 +99,38 @@ def find(matrix: list[list], value) -> Optional[tuple]:
     ---------
     matrix :
     value :
-        a value or a callable/predicate to test value against
+        a literal value or a callable/predicate to test value against
 
     Returns
     -------
     None if nothing was found
-    Otherwise, a tuple of two values, the first being a coordinate xy
-    and the second the value at that coordinate
-
+    Otherwise, a tuple of two values, the first being a position xy
+    and the second the value at that position
     """
+    for item in findall(matrix, value):
+        return item
+
+
+def findall(matrix: list[list], value) -> Iterator:
+    """
+    Iterate over all occurrences of `value` in the matrix.
+
+    Arguments
+    ---------
+    matrix : list[list[Any]]
+        2D matrix
+    value : any literal value or a callable
+        if it is callable, it is a predicate used to test the values in
+        the matrix. Otherwise, the values in the matrix are tested against
+        `value` literally using equality using (==).
+
+    Yields
+    ------
+    Tuple[position, value] where
+    `position` is also a tuple of coordinates (x:int, y:int)
+    `value` is the value at that position in the matrix
+    """
+
     if callable(value):
         is_ok = lambda x: value(x)
     else:
@@ -119,7 +138,7 @@ def find(matrix: list[list], value) -> Optional[tuple]:
 
     for xy, v in scan(matrix, with_value=True):
         if is_ok(v):
-            return xy, v
+            yield xy, v
 
 
 def around(matrix: list[list], xy: tuple[int, int]):
