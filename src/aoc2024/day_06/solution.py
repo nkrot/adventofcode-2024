@@ -1,33 +1,24 @@
 #!/usr/bin/env python
 
-from itertools import product
 from copy import deepcopy
 
 from aoc2024 import from_env
-from aoc2024 import matrix as m
+from aoc2024 import matrix as m, maze as mz, vector as vct
 
 DEBUG = from_env()
-
-
 TURNS = (m.UP, m.RIGHT, m.DOWN, m.LEFT)
 
 
 def load(fpath = None):
-    maze = m.load(fpath)
-    guard = ()
+    maze, guard = mz.load(fpath, "^")
+    guard = [guard, m.UP, 1]
 
-    h, w = m.shape(maze)
-    for r, c in product(range(h), range(w)):
-        v = maze[r][c]
-        if v == "^":
-            guard = [(r, c), m.UP, 1]
+    for (x,y), v in m.scan(maze, with_value=True):
         if v != "#":
-            maze[r][c] = 0
-        # else:
-        #     raise ValueError(f"Invalid value at {(r, c)}: {v}")
+            maze[x][y] = 0
 
-    r, c = guard[0]
-    maze[r][c] = 1
+    x, y = guard[0]
+    maze[x][y] = 1
 
     if DEBUG:
         print(maze)
@@ -37,12 +28,16 @@ def load(fpath = None):
 
 
 def print_maze(maze):
-    for row in maze:
-        ln = [
+    """In a more user-friendly form"""
+    def _row2str(row):
+        cells = [
             ("." if v == 0 else str(v)).rjust(2)
             for v in row
         ]
-        print(" ".join(ln))
+        return " ".join(cells)
+
+    m.print(maze, row_hook=_row2str)
+
 
 def turn(guard):
     """Turn the guard to the right in place"""
@@ -68,11 +63,9 @@ def move(maze, guard):
     Both maze and guard are modified in place!
     """
     # new (target) position
-    x = guard[0][0] + guard[1][0]
-    y = guard[0][1] + guard[1][1]
+    xy = vct.add(guard[0], guard[1])
 
-    v = m.value_at(maze, (x, y))
-    # print((x, y), v)
+    v = m.value_at(maze, xy)
 
     # future position is off the maze. cannot move
     if v is None:
@@ -83,7 +76,7 @@ def move(maze, guard):
         return move(maze, guard)
 
     else:  # free to move to the new position
-        guard[0] = (x, y)
+        guard[0] = xy
         if v == 0:  # first time visiting this cell
             guard[2] += 1
             m.set_value_at(maze, guard[0], guard[2])
@@ -105,19 +98,6 @@ def solve_p1(fpath = None):
         print(guard)
     print(guard[2])
     return guard[2]
-
-
-def points_around(center: tuple[int, int]):
-    """
-    Return a list of points (as coordinates (x,y)) around given center point .
-    Around means UP, DOWN, RIGHT and LEFT of `center`
-    """
-    x, y = center
-    pts = []
-    for dx, dy in TURNS:
-        pt = (x + dx, y + dy)
-        pts.append(pt)
-    return pts
 
 
 # p2: Optimizations
@@ -155,7 +135,7 @@ def position_in_front_of(guard, maze):
         j = (i + di) % len(TURNS)
         dxy = TURNS[j]
 
-        xy = (guard[0][0] + dxy[0], guard[0][1] + dxy[1])
+        xy = vct.add(guard[0], dxy)
         if m.value_at(maze, xy) != "#":
             return xy
 
@@ -163,8 +143,8 @@ def position_in_front_of(guard, maze):
 def solve_p2_v2(fpath = None):
     """
     Optimized version of solve_p2_v1
-    Instead of trying to put an obstacle at any position, we try only the
-    positions along the route the guard walks.
+    Instead of trying to put an obstacle at any position, we try only
+    the positions along the route the guard walks.
 
     Runtime: (DEBUG=1)
     -------
