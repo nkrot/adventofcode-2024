@@ -6,7 +6,7 @@ from typing import Callable
 
 from aoc2024 import load_input, from_env
 from aoc2024 import matrix as m
-from aoc2024 import vector as vtr
+from aoc2024 import vector as vct
 
 DEBUG = from_env()
 
@@ -43,8 +43,8 @@ def solve(fpath: str, get_antinode: Callable) -> int:
 def solve_p1(fpath = None):
 
     def antinodes(city, a, b):
-        dist = vtr.sub(a, b)
-        for nd in [vtr.add(a, dist), vtr.sub(b, dist)]:
+        dist = vct.sub(a, b)
+        for nd in [vct.add(a, dist), vct.sub(b, dist)]:
             if m.value_at(city, nd):
                 yield nd
 
@@ -60,9 +60,9 @@ def solve_p2(fpath = None):
         yield a
         yield b
 
-        dist = vtr.sub(a, b)
+        dist = vct.sub(a, b)
 
-        for curr, op in [(a, vtr.add), (b, vtr.sub)]:
+        for curr, op in [(a, vct.add), (b, vct.sub)]:
             while True:
                 curr = op(curr, dist)
                 if m.value_at(city, curr):
