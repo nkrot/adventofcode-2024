@@ -4,14 +4,14 @@ from itertools import product
 from typing import Any
 
 from aoc2024 import load_input
-from aoc2024 import matrix as m
+from aoc2024 import matrix as m, vector as vct
 
 
 DIRECTIONS = [
-    (0, 1), (0, -1),  # horizontal
-    (1, 0), (-1, 0),  # vertical
-    (1, 1), (-1, -1), # main diagonal
-    (-1,1), (1, -1),  # minor diagonal
+    m.RIGHT, m.LEFT,  # horizontal
+    m.DOWN,  m.UP,    # vertical
+    m.SE,    m.NW,    # / main diagonal
+    m.NE,    m.SW,    # \ minor diagonal
 ]
 
 
@@ -22,7 +22,7 @@ def has_word_at(word, matrix, xy, dxy) -> bool:
     if m.value_at(matrix, xy) != word[0]:
         return False
 
-    nxy = tuple([xy[i] + dxy[i] for i in range(len(xy))])
+    nxy = vct.add(xy, dxy)
 
     return has_word_at(word[1:], matrix, nxy, dxy)
 
@@ -56,16 +56,16 @@ def solve_p2(fpath = None):
 
         # check along main diagonal downwards
         major = (
-            has_word_at("MAS", brd, tl, (1,1))
+            has_word_at("MAS", brd, tl, m.SE)
             or
-            has_word_at("SAM", brd, tl, (1,1))
+            has_word_at("SAM", brd, tl, m.SE)
         )
 
         # check along minor diagonal downwards
         minor = (
-            has_word_at("MAS", brd, tr, (1,-1))
+            has_word_at("MAS", brd, tr, m.SW)
             or
-            has_word_at("SAM", brd, tr, (1,-1))
+            has_word_at("SAM", brd, tr, m.SW)
         )
 
         # print(major, minor)
