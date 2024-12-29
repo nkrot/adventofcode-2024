@@ -6,7 +6,7 @@ from collections import deque
 from dataclasses import dataclass, field
 from functools import reduce
 
-from aoc2024 import load_input, from_env, matrix as m, vector as vct
+from aoc2024 import from_env, matrix as m, vector as vct, maze as mz
 
 DEBUG = from_env()
 
@@ -28,16 +28,8 @@ class PrioritizedReindeer:
 
 
 def load(fpath = None):
-
-    start, end = None, None
-    def find_start_end(xy, v):
-        nonlocal start, end
-        if v == "S": start = xy
-        elif v == "E": end = xy
-
-    maze = m.load(fpath, hook=find_start_end)
+    maze, start, end = mz.load(fpath, pois="SE")
     reindeer = Reindeer(start, m.RIGHT)
-
     # m.set_value_at(maze, end, ".")
 
     if DEBUG:
@@ -71,7 +63,7 @@ def move(rd: Reindeer, xy: tuple[int, int]) -> Reindeer:
         # (0,-1) or (-1,0) means 2 turns of 90 degrees each
         # (1,0) or (0,1) means 0 or 3 turns (no change of direction)
 
-        # Initially not clear how to count turn:
+        # Initially not clear how to count a turn:
         # a) every 90 degree turn counts as 1000?
         # b) a turn of any degree (90, 180, 270) counts as 1000?
         #cost = (1 - sum(diff)) * 1000 # (a)
@@ -122,9 +114,7 @@ def find_path(maze, deer, find_all=False) -> list[Reindeer]:
     is the priority.
     """
 
-    cmp = operator.ge
-    if find_all:
-        cmp = operator.gt
+    cmp = operator.gt if find_all else operator.ge
 
     def qpush(deer):
         deers.put(PrioritizedReindeer(deer)) # 1
